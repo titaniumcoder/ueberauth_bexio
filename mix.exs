@@ -1,8 +1,8 @@
 defmodule UeberauthBexio.MixProject do
   use Mix.Project
 
-  @source_url "https://github.com/smart-software-engineering/ueberauth_bexio"
-  @version "0.3.0"
+  @source_url "https://github.com/titaniumcoder/ueberauth_bexio"
+  @version "0.4.0"
 
   def project do
     [
