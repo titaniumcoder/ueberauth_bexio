@@ -1,11 +1,11 @@
 # Überauth Bexio
 
-[![Continuous Integration](https://github.com/smart-software-engineering/ueberauth_bexio/actions/workflows/elixir.yml/badge.svg)](https://github.com/smart-software-engineering/ueberauth_bexio/actions/workflows/elixir.yml/badge.svg)
+[![Continuous Integration](https://github.com/titaniumcoder/ueberauth_bexio/actions/workflows/elixir.yml/badge.svg)](https://github.com/smart-software-engineering/ueberauth_bexio/actions/workflows/elixir.yml/badge.svg)
 [![Module Version](https://img.shields.io/hexpm/v/ueberauth_bexio.svg)](https://hex.pm/packages/ueberauth_bexio)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ueberauth_bexio/)
 [![Total Download](https://img.shields.io/hexpm/dt/ueberauth_bexio.svg)](https://hex.pm/packages/ueberauth_bexio)
 [![License](https://img.shields.io/hexpm/l/ueberauth_bexio.svg)](https://github.com/ueberauth/ueberauth_bexio/blob/master/LICENSE)
-[![Last Updated](https://img.shields.io/github/last-commit/smart-software-engineering/ueberauth_bexio.svg)](https://github.com/smart-software-engineering/ueberauth_bexio/commits/master)
+[![Last Updated](https://img.shields.io/github/last-commit/stitaniumcoder/ueberauth_bexio.svg)](https://github.com/titaniumcoder/ueberauth_bexio/commits/master)
 
 
 > Bexio OAuth2 strategy for Überauth.
@@ -19,7 +19,7 @@
     ```elixir
     def deps do
       [
-        {:ueberauth_bexio, "~> 0.3.0"}
+        {:ueberauth_bexio, "~> 0.4.0"}
       ]
     end
     ```
@@ -103,6 +103,6 @@ To guard against client-side request modification, it's important to still check
 
 ## Copyright and License
 
-Copyright (c) 2024 Smart Software Engineering SRL
+Copyright (c) 2025 Rico Metzger
 
-Released under the MIT License, which can be found in the repository in [LICENSE](https://github.com/smart-software-engineering/ueberauth_bexio/blob/master/LICENSE).
+Released under the MIT License, which can be found in the repository in [LICENSE](https://github.com/titaniumcoder/ueberauth_bexio/blob/master/LICENSE).
