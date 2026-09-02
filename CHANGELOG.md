@@ -2,6 +2,10 @@
 
 ## (Unreleased)
 
+## v0.4.0
+
+- Move ownership to my new repository structure
+
 ## v0.3.0
 
 - Removed parsing the jwt token, reading the information `company_id`, `company_name`, `uid` from the userinfo endpoint.
