@@ -27,7 +27,6 @@ Key files:
   ```
   Hex is installed from a local archive; rebar3 is a pre-downloaded binary at `~/.mix/rebar3`.
   `curl` works fine through the proxy — use it for any direct downloads (hex archives, etc.).
-- **Never install system packages yourself (apt/sudo). Ask the user** to run installs.
 
 ## Common commands
 

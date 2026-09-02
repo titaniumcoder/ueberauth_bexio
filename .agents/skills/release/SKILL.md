@@ -25,8 +25,6 @@ Hex itself is already installed from a local archive. If a fresh machine is miss
 the right `.ez` for the Elixir version from `https://builds.hex.pm/installs/hex-1.x.csv` with curl
 (curl works fine through the proxy) and run `mix archive.install <file>`.
 
-Never install system packages (apt, etc.) yourself — ask the user to do it.
-
 ## Release steps
 
 1. **Decide the version.** Ask the user if unclear; otherwise infer from the changelog since the
