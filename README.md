@@ -1,11 +1,11 @@
 # Überauth Bexio
 
-[![Continuous Integration](https://github.com/titaniumcoder/ueberauth_bexio/actions/workflows/elixir.yml/badge.svg)](https://github.com/smart-software-engineering/ueberauth_bexio/actions/workflows/elixir.yml/badge.svg)
+[![Continuous Integration](https://github.com/titaniumcoder/ueberauth_bexio/actions/workflows/elixir.yml/badge.svg)](https://github.com/titaniumcoder/ueberauth_bexio/actions/workflows/elixir.yml)
 [![Module Version](https://img.shields.io/hexpm/v/ueberauth_bexio.svg)](https://hex.pm/packages/ueberauth_bexio)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ueberauth_bexio/)
 [![Total Download](https://img.shields.io/hexpm/dt/ueberauth_bexio.svg)](https://hex.pm/packages/ueberauth_bexio)
-[![License](https://img.shields.io/hexpm/l/ueberauth_bexio.svg)](https://github.com/ueberauth/ueberauth_bexio/blob/master/LICENSE)
-[![Last Updated](https://img.shields.io/github/last-commit/stitaniumcoder/ueberauth_bexio.svg)](https://github.com/titaniumcoder/ueberauth_bexio/commits/master)
+[![License](https://img.shields.io/hexpm/l/ueberauth_bexio.svg)](https://github.com/titaniumcoder/ueberauth_bexio/blob/main/LICENSE)
+[![Last Updated](https://img.shields.io/github/last-commit/titaniumcoder/ueberauth_bexio.svg)](https://github.com/titaniumcoder/ueberauth_bexio/commits/main)
 
 
 > Bexio OAuth2 strategy for Überauth.
@@ -97,12 +97,10 @@ config :ueberauth, Ueberauth,
   ]
 ```
 
-TODO: decide what we want to write here!
-
 To guard against client-side request modification, it's important to still check the domain in `info.urls[:website]` within the `Ueberauth.Auth` struct if you want to limit sign-in to a specific domain.
 
 ## Copyright and License
 
 Copyright (c) 2026 Rico Metzger
 
-Released under the MIT License, which can be found in the repository in [LICENSE](https://github.com/titaniumcoder/ueberauth_bexio/blob/master/LICENSE).
+Released under the MIT License, which can be found in the repository in [LICENSE](https://github.com/titaniumcoder/ueberauth_bexio/blob/main/LICENSE).

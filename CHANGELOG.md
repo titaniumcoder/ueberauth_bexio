@@ -4,7 +4,8 @@
 
 ## v0.4.0
 
-- Move ownership to my new repository structure
+- Move ownership to the [titaniumcoder](https://github.com/titaniumcoder/ueberauth_bexio) repository structure
+- Documentation fixes (badges, links)
 
 ## v0.3.0
 
