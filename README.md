@@ -103,6 +103,6 @@ To guard against client-side request modification, it's important to still check
 
 ## Copyright and License
 
-Copyright (c) 2025 Rico Metzger
+Copyright (c) 2026 Rico Metzger
 
 Released under the MIT License, which can be found in the repository in [LICENSE](https://github.com/titaniumcoder/ueberauth_bexio/blob/master/LICENSE).
