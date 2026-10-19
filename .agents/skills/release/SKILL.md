@@ -9,6 +9,10 @@ Releases are published to Hex.pm by GitHub Actions (`.github/workflows/hex.yml`)
 matching `*` is pushed to `origin`. Never run `mix hex.publish` locally — the `HEX_API_KEY` only
 exists in CI.
 
+Conventions: commits follow [Conventional Commits](https://www.conventionalcommits.org/), the
+changelog follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versions follow
+SemVer.
+
 ## Environment setup (this machine)
 
 Elixir/Erlang are managed with asdf (see `.tool-versions`). Because of the TLS-intercepting proxy,
@@ -33,10 +37,14 @@ the right `.ez` for the Elixir version from `https://builds.hex.pm/installs/hex-
 
 2. **Bump the version** in `mix.exs` (`@version "X.Y.Z"`).
 
-3. **Update CHANGELOG.md.** Convert the `## (Unreleased)` section into `## vX.Y.Z` and fill it
-   from the git log since the last tag (`git log --oneline <last-tag>..HEAD`), grouping into
-   human-readable bullets (skip pure housekeeping commits). Keep an empty `## (Unreleased)`
-   section on top.
+3. **Finalize CHANGELOG.md (Keep a Changelog).** Rename the `## [Unreleased]` section to
+   `## [X.Y.Z] - YYYY-MM-DD` (ISO date from the release day). Entries are grouped under
+   `### Added` / `### Changed` / `### Fixed` / `### Removed` / `### Deprecated` / `### Security`;
+   breaking changes go first under `### Changed` with a bold **BREAKING** marker and a migration
+   note. Top up thin sections from the git log since the last tag
+   (`git log --oneline <last-tag>..HEAD`), skipping pure housekeeping commits. Add a compare-link
+   for the new version to the footer at the bottom of the file and keep `[Unreleased]` pointing at
+   `HEAD`. Start a fresh empty `## [Unreleased]` section above the new version.
 
 4. **Update README.md.** The dependency snippet must show `{:ueberauth_bexio, "~> X.Y.0"}`
    matching the new version. While there, fix any stale links/badges you notice.
@@ -52,13 +60,15 @@ the right `.ez` for the Elixir version from `https://builds.hex.pm/installs/hex-
    All three must pass. Also run `mix hex.build` (dry-run, does not publish) and sanity-check the
    package contents against the `files:` list in the `package/0` function of `mix.exs`.
 
-7. **Commit and tag.**
+7. **Commit and tag (Conventional Commits).**
    ```bash
    git add -A
-   git commit -m "Release vX.Y.Z"
-   git tag "vX.Y.Z"
+   git commit -m "chore: release vX.Y.Z"
+   git tag -a "vX.Y.Z" -m "vX.Y.Z"
    git push origin main "vX.Y.Z"
    ```
+   If the release contains breaking changes, use `chore!: release vX.Y.Z` with a
+   `BREAKING CHANGE:` footer instead.
 
 8. **Watch CI** (it runs test + dialyzer + credo, then publishes to Hex.pm):
    ```bash
@@ -69,6 +79,16 @@ the right `.ez` for the Elixir version from `https://builds.hex.pm/installs/hex-
 9. **Confirm publication** at `https://hex.pm/packages/ueberauth_bexio` (or
    `curl -s https://hex.pm/api/packages/ueberauth_bexio | ...` and check the new version appears
    in `releases`). Report success or the failing CI step to the user.
+
+## Notes
+
+- While developing (not releasing), put every user-visible change under `## [Unreleased]` in
+  `CHANGELOG.md` in the same commit as the change (e.g. a `feat:` commit also adds its entry under
+  Unreleased → Added).
+- Version tags exist for all past releases (`git tag -l`) — keep the `vX.Y.Z` format (early tags
+  0.1.0–0.3.0 lack the `v` prefix; new tags always use it).
+- If a release contains breaking changes, the change commit itself must be `feat!:`/`fix!:` with a
+  `BREAKING CHANGE:` footer, and the CHANGELOG entry must carry the bold **BREAKING** marker.
 
 ## Failure handling
 
