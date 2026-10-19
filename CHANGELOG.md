@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `Ueberauth.Strategy.Bexio.logout_url/1` helper building the Keycloak/OIDC end-session (RP-initiated logout) URL for the Bexio realm from the `end_session_endpoint` of its OpenID Connect discovery document, with optional `client_id`, `post_logout_redirect_uri`, and `id_token_hint` params; returns `nil` when no end-session endpoint is published
+
 ## [0.4.0] - 2026-09-02
 
 ### Changed

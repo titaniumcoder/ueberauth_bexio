@@ -65,6 +65,63 @@ defmodule Ueberauth.Strategy.Bexio do
   end
 
   @doc """
+  Builds the Keycloak/OIDC end-session (RP-initiated logout) URL for the Bexio realm.
+
+  The URL is read from the `"end_session_endpoint"` field of the provider's OpenID Connect
+  discovery document (fetched from the configured `site` URL — this performs an HTTP request;
+  cache the result in the host application if you log out frequently).
+
+  Accepts optional options:
+
+  - `:client_id` — the OIDC client id, required by Keycloak when
+    `:post_logout_redirect_uri` is used,
+  - `:post_logout_redirect_uri` — where Bexio redirects after logging out. Must be registered
+    as an allowed post-logout redirect in the [Bexio developer portal](https://developer.bexio.com/),
+  - `:id_token_hint` — the previously obtained ID token, hints Keycloak which session to end.
+
+  Returns the full URL with the query params encoded; with no options, the bare end-session
+  endpoint is returned. Returns `nil` when the provider does not publish an
+  `"end_session_endpoint"` (or discovery fails) — in that case single logout is not
+  available and host applications should only clear their local session.
+
+  ## Examples
+
+      Ueberauth.Strategy.Bexio.logout_url()
+      #=> "https://auth.bexio.com/realms/bexio/protocol/openid-connect/logout"
+
+      Ueberauth.Strategy.Bexio.logout_url(
+        client_id: "my_client",
+        post_logout_redirect_uri: "https://myapp.example.com/logged_out",
+        id_token_hint: id_token
+      )
+      #=> "https://auth.bexio.com/realms/bexio/protocol/openid-connect/logout?client_id=my_client&post_logout_redirect_uri=https%3A%2F%2Fmyapp.example.com%2Flogged_out&id_token_hint=..."
+  """
+  @logout_url_options [:client_id, :post_logout_redirect_uri, :id_token_hint]
+
+  @spec logout_url(keyword()) :: String.t() | nil
+  def logout_url(opts \\ []) do
+    {known, unknown} = Keyword.split(opts, @logout_url_options)
+
+    if unknown != [] do
+      raise ArgumentError,
+            "unknown options #{inspect(Keyword.keys(unknown))}, expected one of #{inspect(@logout_url_options)}"
+    end
+
+    with {:ok, discovery} <- Ueberauth.Strategy.Bexio.OAuth.discovery(),
+         end_session_endpoint when is_binary(end_session_endpoint) and end_session_endpoint != "" <-
+           discovery["end_session_endpoint"] do
+      query =
+        known
+        |> Enum.reject(fn {_key, value} -> is_nil(value) end)
+        |> URI.encode_query()
+
+      if query == "", do: end_session_endpoint, else: "#{end_session_endpoint}?#{query}"
+    else
+      _ -> nil
+    end
+  end
+
+  @doc """
   Fetches the uid field from the user info endpoint.
   """
   def uid(conn), do: conn.private.bexio_user["sub"]

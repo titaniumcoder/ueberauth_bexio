@@ -40,6 +40,33 @@ defmodule Ueberauth.Strategy.Bexio.OAuth do
   end
 
   @doc """
+  Fetches the OpenID Connect discovery document from the configured `site` URL.
+
+  Returns `{:ok, discovery}` with the decoded provider metadata (including
+  `"end_session_endpoint"` when the provider publishes it), or `{:error, reason}`.
+
+  Note that this performs an actual HTTP request.
+  """
+  def discovery(opts \\ []) do
+    oauth_client = client(opts)
+
+    case OAuth2.Client.get(oauth_client, oauth_client.site, [], []) do
+      {:ok, %OAuth2.Response{status_code: status, body: body}}
+      when status in 200..299 and is_map(body) ->
+        {:ok, body}
+
+      {:ok, %OAuth2.Response{status_code: status}} ->
+        {:error, {:discovery, status}}
+
+      {:error, %OAuth2.Error{reason: reason}} ->
+        {:error, {:discovery, reason}}
+
+      {:error, reason} ->
+        {:error, reason}
+    end
+  end
+
+  @doc """
   Provides the authorize url for the request phase of Ueberauth. No need to call this usually.
   """
   def authorize_url!(params \\ [], opts \\ []) do
